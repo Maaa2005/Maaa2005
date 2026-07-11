@@ -26,12 +26,13 @@ App Store で公開中。「起きられない」だけでなく「起きた後�
 「機密保持」と「自動化」のトレードオフを技術で壊すことを狙っています。
 - → **[設計ドキュメント: local-rag-architecture](https://github.com/Maaa2005/local-rag-architecture)**（コードは非公開のため、設計判断を公開）
 
-### TwinLink — 本人代理AIエージェントの通信基盤（macOS / 開発中）
+### ENISHI — 本人代理AIエージェントの通信基盤（macOS / 開発中）
 「自分の代理AIエージェント同士が、人間の代わりに日程調整などを構造化データで交渉する」ためのプラットフォーム。
+名前は縁（人と人のつながり）と阿吽（言葉なしに呼吸を合わせる二者）から。エージェント間プロトコルは **AUN Protocol** と呼んでいます。
 Tauri 2 + React のデスクトップアプリと、127.0.0.1限定・Bearer認証必須の Local Core（FastAPI）で構成。
-エージェント間プロトコルの設計から実装まで個人開発しています。
+選択的開示（相手に見せる情報を最小化）と人間承認ゲートを核に、プロトコルの設計から実装まで個人開発しています。
 - 技術: TypeScript / React / Tauri 2 / Python(FastAPI)
-- → **[リポジトリ: TwinLink](https://github.com/Maaa2005/TwinLink)**
+- → **[リポジトリ: ENISHI](https://github.com/Maaa2005/ENISHI)**
 
 ### 服選び支援Webアプリ（学内チーム開発中・仕様検討段階）
 複数人の学内チームで開発中の Web アプリ。Next.js / Supabase。**フロントエンド設計とポイント管理を担当**。
