@@ -2,7 +2,7 @@
 
 AI × Product Engineer — on-device ML, LLM agents, and iOS, end-to-end to the App Store.
 
-**Now:** 3rd-year at IPUT Nagoya, graduating 2028. Exploring multi-agent orchestration and external memory for LLMs.
+**Now:** Student, graduating 2028. Exploring multi-agent orchestration and external memory for LLMs.
 
 **Shipped:** [Stellise](https://apps.apple.com/jp/app/id6760934295) — an AI alarm app with on-device audio/motion inference, built and released as a two-person team where I led engineering and product.
 
