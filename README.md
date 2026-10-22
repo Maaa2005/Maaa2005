@@ -28,8 +28,11 @@ I build the pieces: apps that capture real-world context, and tools that let AI 
 
 ### Stack
 
-`Swift` `SwiftUI` `TypeScript` `Python` `MCP` `Tauri` `FastAPI` `Qdrant`
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.png">
+  <img alt="Languages: Swift, Python, TypeScript, JavaScript, C. iOS: SwiftUI, App Intents, WidgetKit, StoreKit 2, Core Motion, EventKit, Xcode. AI and agents: MCP, Claude API, Claude Code, Gemini API, Qdrant, vLLM, local LLMs, RAG, TensorFlow Lite, NumPy, pandas. Web and backend: FastAPI, Flask, Pydantic, SQLAlchemy, React, Next.js, Node.js, Vite, Playwright, Vitest, Firebase, Google Cloud. Desktop and tools: Tauri, Docker, GitHub Actions, Git, Figma." src="assets/stack-light.png" width="100%">
+</picture>
 
 **Open to** internships and 2028 new-grad roles.
 
-<sub>JDLA G検定 · Google AI Professional Certificate</sub>
+<sub>JDLA G検定 · Google AI Professional Certificate · Tongali Idea Pitch Contest, Runner-up Prize (2025)</sub>
