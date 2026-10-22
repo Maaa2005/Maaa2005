@@ -1,18 +1,22 @@
-### Hi, I'm Masashi 👋
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg">
+  <img alt="Masashi Nakamura — AI agents · MCP · local LLMs · iOS" src="assets/header-light.svg" width="100%">
+</picture>
 
-AI × Product Engineer — on-device ML, LLM agents, and iOS, end-to-end to the App Store.
+Student engineer in Nagoya, Japan · class of 2028.
+I build tools that let AI agents do real work — talk to each other, use the web, and read the right context.
 
-**Now:** Student, graduating 2028. Exploring multi-agent orchestration and external memory for LLMs.
+**Building**
 
-**Shipped:** [Stellise](https://apps.apple.com/jp/app/id6760934295) — an AI alarm app with on-device audio/motion inference, built and released as a two-person team where I led engineering and product.
+- **[ENISHI](https://github.com/Maaa2005/ENISHI)** — your AI agent negotiates and schedules with other people's agents, only with your approval.
+- **[Web Capability Compiler](https://github.com/Maaa2005/web-capability-compiler)** — compiles existing websites into typed tools for MCP agents.
+- **[KASANE](https://github.com/Maaa2005/KASANE)** — lints, explains, and compares the context your coding agent actually reads.
+- **[local-rag-agent](https://github.com/Maaa2005/local-rag-agent)** — an offline RAG prototype for confidential documents, with permission-aware search.
 
-**Also building:**
+**Shipped**
 
-- [KASANE](https://github.com/Maaa2005/KASANE) — a local CLI that lints, explains, and compares the context AI coding agents actually receive.
-- [ENISHI](https://github.com/Maaa2005/ENISHI) — a platform where your personal AI agent negotiates scheduling and other tasks on your behalf.
-- [local-rag-agent](https://github.com/Maaa2005/local-rag-agent) — a fully offline RAG agent for confidential in-house documents.
+- **[Stellise](https://apps.apple.com/jp/app/id6760934295)** — an iOS app where AI suggests your morning tasks from your schedule and the weather. Built by a two-person team in about four months; I did product planning and the SwiftUI front end.
 
-I like using AI to turn a good idea into something real.
+**Now** — exploring how agents remember, coordinate, and act on your behalf. Open to internships and 2028 new-grad roles.
 
-- 🌱 Google AI Professional Certificate · JDLA G検定
-- 🏆 Tongali Business Plan Contest — 2nd place
+<sub>JDLA G検定 · Google AI Professional Certificate · Tongali Idea Pitch Contest, Runner-up Prize (2025)</sub>
