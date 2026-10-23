@@ -26,7 +26,7 @@ I build the pieces: apps that capture real-world context, and tools that let AI 
 ### Building
 
 <p>
-<a href="https://github.com/Maaa2005/ENISHI"><img alt="ENISHI — Your AI agent negotiates and schedules with other people's agents — only with your approval." src="assets/cards/enishi.png" width="49%"></a>
+<a href="https://github.com/Maaa2005/aun-protocol"><img alt="AUN Protocol — An open protocol for AI agents that negotiate for their owners — minimal disclosure, human approval." src="assets/cards/aun.png" width="49%"></a>
 <a href="https://github.com/Maaa2005/web-capability-compiler"><img alt="Web Capability Compiler — Compiles existing websites into typed tools that MCP agents can call." src="assets/cards/wcc.png" width="49%"></a>
 </p>
 <p>
