@@ -1,0 +1,77 @@
+name: 点検
+
+# 変更依頼のたびに、README の点検・毎朝の自動更新の試し運転・画像の作り直しを回す。
+# どれも main には何も書き込まない。
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  readme:
+    name: README と画像の点検
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/check_readme.py README.md
+
+  daily-dry-run:
+    name: 毎朝の自動更新を試しに動かす
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 最近の更新と活動の表を作る（recent.yml と同じ手順）
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 tools/update_recent.py README.md 2>&1 | tee recent.log
+          python3 tools/build_activity.py assets 2>&1 | tee activity.log
+          if grep -q "no data" recent.log; then echo "::error::最近の更新を取れなかった"; exit 1; fi
+          if grep -q "fetch failed" activity.log; then echo "::error::活動の数字を取れなかった"; exit 1; fi
+      - name: 変わる所を見せる
+        run: |
+          git diff --stat
+          git diff -- README.md
+          sed -n '/<!-- recent:start -->/,/<!-- recent:end -->/p' README.md >> "$GITHUB_STEP_SUMMARY"
+          grep -o 'class="big"[^>]*>[^<]*' assets/activity-light.svg | head -2 >> "$GITHUB_STEP_SUMMARY"
+      - name: 書き換えた後も点検を通る
+        run: |
+          # README の中で変わってよいのは「最近の更新」の目印の内側だけ
+          git show HEAD:README.md | sed '/<!-- recent:start -->/,/<!-- recent:end -->/d' > before.txt
+          sed '/<!-- recent:start -->/,/<!-- recent:end -->/d' README.md > after.txt
+          diff before.txt after.txt
+          python3 tools/check_readme.py README.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: daily-dry-run
+          path: |
+            README.md
+            assets/activity-*.svg
+
+  images:
+    name: 画像の作り直し
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 要る物を入れる
+        run: |
+          sh tools/setup_build.sh "$RUNNER_TEMP/build"
+          cd "$RUNNER_TEMP/build" && npx playwright install-deps chromium
+          python3 -m pip install --quiet fonttools brotli pillow
+      - name: 作り直す
+        env:
+          NODE_PATH: ${{ runner.temp }}/build/node_modules
+        run: sh tools/build_all.sh "$RUNNER_TEMP/build/fonts" "$RUNNER_TEMP/build" python3
+      - name: 作り直した画像でも点検を通る
+        run: |
+          git status --short
+          python3 tools/check_readme.py README.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rebuilt-images
+          path: assets/
