@@ -15,7 +15,7 @@
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/numbers-dark.png"><img alt="(01) 数字で見る" src="assets/sections/numbers-light.png" width="100%"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.png"><img alt="App Storeで公開中のアプリ 2本 / 公開しているOSS 4本 / WCCのテスト 553件 / WCCでAIへ渡す情報量 約87%減" src="assets/stats-light.png" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.png"><img alt="App Storeで公開中のアプリ 2本 / GitHubで公開中の作品 4本 / WCCのテスト 553件 / WCCでAIへ渡す情報量 約87%減（150商品のページで計測）" src="assets/stats-light.png" width="100%"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/apps-dark.png"><img alt="(02) App Storeで公開中" src="assets/sections/apps-light.png" width="100%"></picture>
 
@@ -23,7 +23,7 @@
 
 <a href="https://apps.apple.com/jp/app/voice-context/id6804673846"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/showcase/voice-context-dark.svg"><img alt="Voice Context — 対面の会話を、AIエージェントが後から読める記録に変えるiOSアプリ。開発を担当、App Storeへの公開はチームメイト。" src="assets/showcase/voice-context-light.svg" width="100%"></picture></a>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/oss-dark.png"><img alt="(03) 公開しているOSS" src="assets/sections/oss-light.png" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/oss-dark.png"><img alt="(03) GitHubで公開中" src="assets/sections/oss-light.png" width="100%"></picture>
 
 <p>
 <a href="https://github.com/Maaa2005/web-capability-compiler"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/wcc-dark.png"><img alt="Web Capability Compiler — 既存のWebサイトを、AIエージェントが安全に呼べる道具に変える。個人開発、テスト553件、AIへ渡す情報量を約87%削減。" src="assets/cards/wcc-light.png" width="49%"></picture></a>
@@ -40,7 +40,7 @@
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/timeline-dark.png"><img alt="(05) 歩み" src="assets/sections/timeline-light.png" width="100%"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/panels/timeline-dark.png"><img alt="2025.10 Tongali アイデアピッチコンテスト 準優秀賞／2026.05 G検定・Google AI Professional Certificate／2026.07 KASANE を npm で公開／2026.09 技育博2026 に Stellise を出展・Voice Context を App Store で公開／2026.10 AUN Protocol を仕様として公開・WCC の比較計測（27回）を公開" src="assets/panels/timeline-light.png" width="100%"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/panels/timeline-dark.png"><img alt="2025.10 Tongali アイデアピッチコンテスト 準優秀賞／2026.05 G検定・Google AI Professional Certificate／2026.07 KASANE を npm で公開／2026.09 技育博2026 に Stellise を出展・Voice Context が App Store で公開／2026.10 AUN Protocol の仕様を公開・WCC の比較計測（27回）を公開" src="assets/panels/timeline-light.png" width="100%"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/activity-dark.png"><img alt="(06) 毎日の積み重ね" src="assets/sections/activity-light.png" width="100%"></picture>
 
@@ -68,8 +68,8 @@
 
 Student engineer in Nagoya, Japan · class of 2028. I build the pieces: iOS apps that capture real-world context, and tools that let AI agents act on it safely.
 
-- **Shipped on the App Store:** Stellise (an alarm app where AI suggests your morning tasks; team of two, I did planning and the SwiftUI front end) · Voice Context (turns in-person conversations into context your AI agents can read).
-- **Open source:** Web Capability Compiler · AUN Protocol · KASANE (`kasane-cli` on npm) · local-rag-agent.
+- **Shipped on the App Store:** Stellise (an alarm app where AI suggests your morning tasks; team of two, I did planning and the SwiftUI front end) · Voice Context (turns in-person conversations into context your AI agents can read; I built it, a teammate handles the App Store release).
+- **On GitHub:** Web Capability Compiler · AUN Protocol · KASANE (`kasane-cli` on npm) · local-rag-agent (team prototype).
 - JDLA G検定 · Google AI Professional Certificate · Tongali Idea Pitch Contest, Runner-up Prize (2025).
 
 Open to internships and 2028 new-grad roles.
