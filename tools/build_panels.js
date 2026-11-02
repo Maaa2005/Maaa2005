@@ -87,7 +87,7 @@ function timelineHtml(t) {
   .dot { width: 11px; height: 11px; border-radius: 50%; background: ${t.bg}; border: 2px solid ${t.dot}; margin: 12px 0 14px; position: relative; z-index: 1; }
   .now .dot { background: ${t.dot}; box-shadow: 0 0 0 5px ${t.soft}; }
   .now .date { color: ${t.accent}; }
-  p { font: 500 12.5px/1.7 'Inter', 'Noto Sans JP'; color: ${t.body}; }
+  p { font: 500 12px/1.7 'Inter', 'Noto Sans JP'; color: ${t.body}; }
   `);
 }
 
