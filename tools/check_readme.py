@@ -1,7 +1,10 @@
 """README.md と画像を点検する。CI（.github/workflows/check.yml）と手元で使う。
 
 見る物:
-- 画像がすべてあり、どの <picture> も暗い画面用と明るい画面用の2枚がそろっている
+- 画像がすべてあり、明るい画面用と暗い画面用が組になっている
+  （<picture> は使わない。見る人のブラウザの設定に従うので、GitHub だけ暗くしている人には
+  暗いページに明るい画像が出る。2026-10-22 に本人の画面で起きた。GitHub のテーマに従う
+  #gh-light-mode-only / #gh-dark-mode-only の付いたリンクで包む）
 - 画像に代わりの文（alt）がある
 - 「最近の更新」の目印が1組ある
 - 学校名が入っていない（7月に本人の判断で外した）
@@ -19,8 +22,7 @@ from build_activity import sample_weeks  # noqa: E402
 
 MAX_MB = 3.0
 NG_WORDS = ["国際工科", "専門職大学", "NIT Nagoya", "International Institute of Technology"]
-PICTURE = re.compile(r"<picture>(.*?)</picture>", re.S)
-SOURCE = re.compile(r'<source media="\(prefers-color-scheme: dark\)" srcset="([^"]+)"\s*/?>')
+MODE = re.compile(r'<a href="(?P<href>[^"]+)#gh-(?P<mode>light|dark)-mode-only"><img\b(?P<img>[^>]*)></a>')
 IMG = re.compile(r"<img\b([^>]*)>")
 ATTR = re.compile(r'(\w+)="([^"]*)"')
 
@@ -44,21 +46,24 @@ def main():
         if src and local(src) and not os.path.exists(os.path.join(root, src)):
             errors.append(f"画像が無い: {src}")
 
-    pictures = PICTURE.findall(text)
-    for body in pictures:
-        dark = SOURCE.search(body)
-        img = IMG.search(body)
-        light = dict(ATTR.findall(img.group(1))).get("src", "") if img else ""
-        if not dark or not light:
-            errors.append(f"明暗の片方が無い: {body[:80]}")
-            continue
-        dark = dark.group(1)
-        if not os.path.exists(os.path.join(root, dark)):
-            errors.append(f"画像が無い: {dark}")
-        if dark.replace("-dark.", "-light.") != light:
-            errors.append(f"明暗の組が合わない: {dark} / {light}")
-        used["dark"].add(dark)
-        used["light"].add(light)
+    if "<picture" in text:
+        errors.append("<picture> を使っている（GitHub のテーマに従わない）。#gh-light-mode-only / #gh-dark-mode-only の組にする")
+    modes = [(m["mode"], m["href"], dict(ATTR.findall(m["img"])).get("src", "")) for m in MODE.finditer(text)]
+    pairs = 0
+    for i in range(0, len(modes), 2):
+        light, dark = modes[i], modes[i + 1] if i + 1 < len(modes) else ("", "", "")
+        if light[0] != "light" or dark[0] != "dark":
+            errors.append(f"明るい画面用と暗い画面用が順に並んでいない: {light[2]}")
+            break
+        if light[2].replace("-light.", "-dark.") != dark[2] or "-light." not in light[2]:
+            errors.append(f"明暗の組が合わない: {light[2]} / {dark[2]}")
+        if light[1] != dark[1] and (light[1], dark[1]) != (light[2], dark[2]):
+            errors.append(f"明暗でリンク先が違う: {light[1]} / {dark[1]}")
+        if not os.path.exists(os.path.join(root, dark[2])):
+            errors.append(f"画像が無い: {dark[2]}")
+        used["light"].add(light[2])
+        used["dark"].add(dark[2])
+        pairs += 1
 
     if text.count("<!-- recent:start -->") != 1 or text.count("<!-- recent:end -->") != 1 \
             or text.index("<!-- recent:start -->") > text.index("<!-- recent:end -->"):
@@ -85,7 +90,7 @@ def main():
         if size > MAX_MB * 1048576:
             errors.append(f"{theme} の画像が重い: {size / 1048576:.2f} MB（上限 {MAX_MB} MB）")
 
-    print(f"pictures: {len(pictures)}")
+    print(f"pairs: {pairs}")
     for e in errors:
         print("NG:", e)
     if errors:
