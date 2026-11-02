@@ -13,15 +13,17 @@
 
 名古屋の学生エンジニアです（2028年卒）。そのための部品として、身の回りの文脈を拾う **iOSアプリ** と、AIエージェントが安全に動くための **道具** を作っています。
 
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/numbers-dark.png"><img alt="(01) 数字で見る" src="assets/sections/numbers-light.png" width="100%"></picture>
+
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.png"><img alt="App Storeで公開中のアプリ 2本 / 公開しているOSS 4本 / WCCのテスト 553件 / WCCでAIへ渡す情報量 約87%減" src="assets/stats-light.png" width="100%"></picture>
 
-### App Storeで公開中
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/apps-dark.png"><img alt="(02) App Storeで公開中" src="assets/sections/apps-light.png" width="100%"></picture>
 
 <a href="https://apps.apple.com/jp/app/id6760934295"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/showcase/stellise-dark.svg"><img alt="Stellise — 予定と天気から、AIが朝にやることを提案する目覚ましアプリ。2名のチームで約4か月。企画とSwiftUIのフロントエンドを担当。" src="assets/showcase/stellise-light.svg" width="100%"></picture></a>
 
 <a href="https://apps.apple.com/jp/app/voice-context/id6804673846"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/showcase/voice-context-dark.svg"><img alt="Voice Context — 対面の会話を、AIエージェントが後から読める記録に変えるiOSアプリ。開発を担当、App Storeへの公開はチームメイト。" src="assets/showcase/voice-context-light.svg" width="100%"></picture></a>
 
-### 公開しているOSS
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/oss-dark.png"><img alt="(03) 公開しているOSS" src="assets/sections/oss-light.png" width="100%"></picture>
 
 <p>
 <a href="https://github.com/Maaa2005/web-capability-compiler"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/wcc-dark.png"><img alt="Web Capability Compiler — 既存のWebサイトを、AIエージェントが安全に呼べる道具に変える。個人開発、テスト553件、AIへ渡す情報量を約87%削減。" src="assets/cards/wcc-light.png" width="49%"></picture></a>
@@ -32,21 +34,17 @@
 <a href="https://github.com/Maaa2005/local-rag-agent"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/cards/local-rag-agent-dark.png"><img alt="local-rag-agent — 機密文書をネットに出さずに検索するRAGの試作。チーム開発、RAGの設計と構築を担当。" src="assets/cards/local-rag-agent-light.png" width="49%"></picture></a>
 </p>
 
-### 大事にしていること
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/principles-dark.png"><img alt="(04) 大事にしていること" src="assets/sections/principles-light.png" width="100%"></picture>
 
-- **作って、届ける。** 企画から公開まで運びきる。Stellise は2名のチームで約4か月かけて App Store に出しました。
-- **動いたあとに、目的を測る。** テストが通っても終わりにしない。WCC では553件のテストが通ったあとに、AIへ渡す情報量が膨らんでいるのを計測で見つけ、約87%減らしました。
-- **AIに任せる範囲は、仕組みで守る。** 購入や送信は実行前に止める（WCC）。交渉の最後は人が承認する（AUN Protocol）。
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/panels/principles-dark.png"><img alt="作って、届ける。企画から公開まで運びきる。Stellise は2名のチームで約4か月かけて App Store に出しました。／動いたあとに、目的を測る。テストが通っても終わりにしない。WCC では553件のテストが通ったあとに、AIへ渡す情報量が膨らんでいるのを見つけ、約87%減らしました。／AIに任せる範囲は、仕組みで守る。購入や送信は実行前に止める（WCC）。交渉の最後は人が承認する（AUN Protocol）。" src="assets/panels/principles-light.png" width="100%"></picture>
 
-### 歩み
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/timeline-dark.png"><img alt="(05) 歩み" src="assets/sections/timeline-light.png" width="100%"></picture>
 
-- <samp>2026.10</samp>　AUN Protocol を仕様として公開 ・ WCC の比較計測（27回）を公開
-- <samp>2026.09</samp>　技育博2026 に Stellise を出展 ・ Voice Context を App Store で公開
-- <samp>2026.07</samp>　KASANE を npm で公開
-- <samp>2026.05</samp>　G検定 ・ Google AI Professional Certificate
-- <samp>2025.10</samp>　Tongali アイデアピッチコンテスト 準優秀賞
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/panels/timeline-dark.png"><img alt="2025.10 Tongali アイデアピッチコンテスト 準優秀賞／2026.05 G検定・Google AI Professional Certificate／2026.07 KASANE を npm で公開／2026.09 技育博2026 に Stellise を出展・Voice Context を App Store で公開／2026.10 AUN Protocol を仕様として公開・WCC の比較計測（27回）を公開" src="assets/panels/timeline-light.png" width="100%"></picture>
 
-### 最近の更新
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/activity-dark.png"><img alt="(06) 毎日の積み重ね" src="assets/sections/activity-light.png" width="100%"></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg"><img alt="GitHub の活動（この1年、日ごと）。毎朝自動で描き直しています。" src="assets/activity-light.svg" width="100%"></picture>
 
 <!-- recent:start -->
 - <samp>11/02</samp>　**[Stellise](https://github.com/Maaa2005/Stellise)** — docs(privacy): list the API server, Google Maps and OpenWea…
@@ -55,9 +53,9 @@
 - <samp>10/23</samp>　**[aun-protocol](https://github.com/Maaa2005/aun-protocol)** — Add agent card checks (aun-card/1)
 <!-- recent:end -->
 
-<sub>毎朝、公開しているリポジトリから自動で書き換えています。</sub>
+<sub>活動の表と最近の更新は、毎朝 GitHub Actions で自動で書き換えています。</sub>
 
-### 使っている技術
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/sections/stack-dark.png"><img alt="(07) 使っている技術" src="assets/sections/stack-light.png" width="100%"></picture>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.png"><img alt="Languages: Swift, Python, TypeScript, JavaScript, C. iOS: SwiftUI, App Intents, WidgetKit, StoreKit 2, Core Motion, EventKit, Xcode. AI and agents: MCP, Claude API, Claude Code, Gemini API, Qdrant, vLLM, local LLMs, RAG, TensorFlow Lite, NumPy, pandas. Web and backend: FastAPI, Flask, Pydantic, SQLAlchemy, React, Next.js, Node.js, Vite, Playwright, Vitest, Firebase, Google Cloud. Desktop and tools: Tauri, Docker, GitHub Actions, Git, Figma." src="assets/stack-light.png" width="100%"></picture>
 

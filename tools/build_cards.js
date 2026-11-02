@@ -120,10 +120,10 @@ function statsHtml(t) {
   .strip::after { content: ''; position: absolute; inset: 0 0 auto 0; height: 1.5px; background: linear-gradient(90deg, transparent, #8B7CF6${t.line}, transparent); }
   .cell { display: flex; flex-direction: column; justify-content: center; padding: 0 26px; }
   .cell + .cell { border-left: 1px solid ${t.divider}; }
-  .num { font: 700 34px/1 'Inter'; letter-spacing: -1px; background: ${grad}; -webkit-background-clip: text; color: transparent; }
+  .num { font: 400 46px/1 'Instrument Serif', serif; letter-spacing: -.5px; background: ${grad}; -webkit-background-clip: text; color: transparent; padding-right: 2px; }
   .num small, .num .pre { font: 500 14px 'Inter', 'Noto Sans JP'; letter-spacing: 0; color: ${t.body}; -webkit-text-fill-color: ${t.body}; }
   .num small { margin-left: 3px; } .num .pre { margin-right: 3px; }
-  .label { margin-top: 10px; font: 400 12px 'Inter', 'Noto Sans JP'; color: ${t.sub}; }
+  .label { margin-top: 8px; font: 400 12px 'Inter', 'Noto Sans JP'; color: ${t.sub}; }
   </style></head><body><div class="strip" id="c">
   ${STATS.map((x) => `<div class="cell"><div class="num">${x.pre ? `<span class="pre">${x.pre}</span>` : ''}${x.num}<small>${x.unit}</small></div><div class="label">${x.label}</div></div>`).join('')}
   </div></body></html>`;

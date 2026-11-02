@@ -7,7 +7,9 @@
 | `assets/hero-*.svg` | `build_hero.py` | 名前と一言、浮かぶ画面3枚。真ん中の Stellise は夜の画面から朝の画面へ切り替わる |
 | `assets/showcase/*-*.svg` | `build_showcase.js` → `build_strips.py` | アプリの紹介帯。下地を描いてから、画面を重ねて動きを付ける |
 | `assets/cards/*-*.png`・`assets/stats-*.png` | `build_cards.js` | OSSのカードと数字の帯。文言はファイル先頭の `CARDS`・`STATS` |
+| `assets/sections/*-*.png`・`assets/panels/*-*.png` | `build_panels.js` | 段の見出し（番号・欧文の斜体・細い罫線）と「大事にしていること」「歩み」の板 |
 | `assets/stack-*.png` | `build_stack.js` | 使っている技術。ロゴは simple-icons |
+| `assets/activity-*.svg` | `build_activity.py` | この1年の活動の表。`.github/workflows/recent.yml` が毎朝描き直す。手元では `--placeholder`（集計前の空の表）か `--sample`（形を見る作り物。コミットしない） |
 | README の「最近の更新」 | `update_recent.py` | `.github/workflows/recent.yml` が毎朝動かす |
 
 - 画面写真は `tools/shots/`（Stellise と Voice Context の公開リポジトリにある画面写真を縮めた物）。
@@ -16,16 +18,16 @@
 
 ## 用意する物
 
-書体と simple-icons を npm から取ります。
+書体（Noto Sans JP・Inter・JetBrains Mono・Instrument Serif）と simple-icons を npm から取ります。
 
 ```sh
 mkdir -p /tmp/f && cd /tmp/f
-npm pack @fontsource/noto-sans-jp @fontsource/inter @fontsource/jetbrains-mono
+npm pack @fontsource/noto-sans-jp @fontsource/inter @fontsource/jetbrains-mono @fontsource/instrument-serif
 for t in *.tgz; do mkdir -p "${t%.tgz}" && tar -xzf "$t" -C "${t%.tgz}"; done
 mkdir -p fonts && cp */package/files/*.woff2 fonts/
-for d in fontsource-noto-sans-jp-*:noto-jp fontsource-inter-*:inter fontsource-jetbrains-mono-*:mono; do
+for d in fontsource-noto-sans-jp-*:noto-jp fontsource-inter-*:inter fontsource-jetbrains-mono-*:mono fontsource-instrument-serif-*:serif; do
   src=${d%%:*}; name=${d##*:}
-  for c in $src/package/[0-9]*.css; do sed 's#url(./files/#url(./#g' "$c" > "fonts/$name-$(basename "$c")"; done
+  for c in $src/package/[0-9]*.css; do  # 400.css・400-italic.css など sed 's#url(./files/#url(./#g' "$c" > "fonts/$name-$(basename "$c")"; done
 done
 mkdir -p /tmp/icons && cd /tmp/icons && npm init -y >/dev/null && npm install simple-icons@13.21.0
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install fonttools brotli pillow
