@@ -27,7 +27,7 @@ for t in *.tgz; do mkdir -p "${t%.tgz}" && tar -xzf "$t" -C "${t%.tgz}"; done
 mkdir -p fonts && cp */package/files/*.woff2 fonts/
 for d in fontsource-noto-sans-jp-*:noto-jp fontsource-inter-*:inter fontsource-jetbrains-mono-*:mono fontsource-instrument-serif-*:serif; do
   src=${d%%:*}; name=${d##*:}
-  for c in $src/package/[0-9]*.css; do  # 400.css・400-italic.css など sed 's#url(./files/#url(./#g' "$c" > "fonts/$name-$(basename "$c")"; done
+  for c in $src/package/[0-9]*.css; do sed 's#url(./files/#url(./#g' "$c" > "fonts/$name-$(basename "$c")"; done
 done
 mkdir -p /tmp/icons && cd /tmp/icons && npm init -y >/dev/null && npm install simple-icons@13.21.0
 python3 -m venv /tmp/venv && /tmp/venv/bin/pip install fonttools brotli pillow
