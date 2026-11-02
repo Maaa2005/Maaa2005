@@ -47,9 +47,9 @@
 <a href="assets/activity-light.svg#gh-light-mode-only"><img alt="GitHub の活動（この1年、日ごと）。毎朝自動で描き直しています。" src="assets/activity-light.svg" width="100%"></a><a href="assets/activity-dark.svg#gh-dark-mode-only"><img alt="GitHub の活動（この1年、日ごと）。毎朝自動で描き直しています。" src="assets/activity-dark.svg" width="100%"></a>
 
 <!-- recent:start -->
-- <samp>11/02</samp>　**[KASANE](https://github.com/Maaa2005/KASANE)** — fix: expand Claude Code @path imports before comparing agen…
+- <samp>11/02</samp>　**[KASANE](https://github.com/Maaa2005/KASANE)** — ci: pnpm/action-setup をコミットの指紋で固定する (#4)
+- <samp>11/02</samp>　**[local-rag-agent](https://github.com/Maaa2005/local-rag-agent)** — chore(backend): PyJWT と python-multipart を既知の穴が塞がった版へ上げる (#…
 - <samp>11/02</samp>　**[Stellise](https://github.com/Maaa2005/Stellise)** — docs(privacy): list the API server, Google Maps and OpenWea…
-- <samp>10/27</samp>　**[local-rag-agent](https://github.com/Maaa2005/local-rag-agent)** — ci: backend の単体テストを PR と main で回す
 - <samp>10/23</samp>　**[aun-protocol](https://github.com/Maaa2005/aun-protocol)** — Add agent card checks (aun-card/1)
 <!-- recent:end -->
 
