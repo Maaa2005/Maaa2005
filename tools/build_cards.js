@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const { fontCss: readFontCss, serveFonts, fontsReady, phrase, PHRASE_CSS } = require('./render');
 
 const FONT_DIR = path.resolve(process.argv[2] || process.env.FONT_DIR || 'fonts');
 const ROOT = path.resolve(__dirname, '..');
@@ -46,17 +47,12 @@ const CARDS = [
 
 const STATS = [
   { num: '2', unit: '本', label: 'App Storeで公開中のアプリ' },
-  { num: '4', unit: '本', label: '公開しているOSS' },
+  { num: '4', unit: '本', label: 'GitHubで公開中の作品' },
   { num: '553', unit: '件', label: 'WCCのテスト' },
-  { num: '87', unit: '%減', pre: '約', label: 'WCCでAIへ渡す情報量' },
+  { num: '87', unit: '%減', pre: '約', label: 'WCCでAIへ渡す情報量', note: '150商品のページで計測' },
 ];
 
-function fontCss() {
-  return fs.readdirSync(FONT_DIR)
-    .filter((f) => f.endsWith('.css'))
-    .map((f) => fs.readFileSync(path.join(FONT_DIR, f), 'utf8'))
-    .join('\n');
-}
+const fontCss = () => readFontCss(FONT_DIR);
 
 // 明るい画面用と暗い画面用の色。README では <picture> で出し分ける。
 const THEMES = {
@@ -74,7 +70,7 @@ const BASE = (t) => `
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: transparent; }
   body { font-family: 'Inter', 'Noto Sans JP', sans-serif; color: ${t.fg}; -webkit-font-smoothing: antialiased; }
-  .desc, .meta, .label { word-break: auto-phrase; text-wrap: pretty; }
+  .desc, .meta, .label { ${PHRASE_CSS} }
 `;
 
 function iconHtml(icon) {
@@ -106,8 +102,8 @@ function cardHtml(c, t) {
   .tag { font: 400 11px 'JetBrains Mono'; color: ${t.body}; background: ${t.tagBg}; border: 1px solid ${t.tagBorder}; border-radius: 999px; padding: 3px 10px; }
   </style></head><body><div class="card" id="c">
     <div class="top">${iconHtml(c.icon)}<div><h1>${c.title}</h1><div class="status"><span class="dot"></span>${st.text}</div></div></div>
-    <div class="desc">${c.desc}</div>
-    <div class="meta">${c.meta}</div>
+    <div class="desc">${phrase(c.desc)}</div>
+    <div class="meta">${phrase(c.meta)}</div>
     <div class="tags">${c.tags.map((x) => `<span class="tag">${x}</span>`).join('')}</div>
   </div></body></html>`;
 }
@@ -124,14 +120,15 @@ function statsHtml(t) {
   .num small, .num .pre { font: 500 14px 'Inter', 'Noto Sans JP'; letter-spacing: 0; color: ${t.body}; -webkit-text-fill-color: ${t.body}; }
   .num small { margin-left: 3px; } .num .pre { margin-right: 3px; }
   .label { margin-top: 8px; font: 400 12px 'Inter', 'Noto Sans JP'; color: ${t.sub}; }
+  .note { margin-top: 2px; font: 400 10px 'Inter', 'Noto Sans JP'; color: ${t.sub}; opacity: .8; }
   </style></head><body><div class="strip" id="c">
-  ${STATS.map((x) => `<div class="cell"><div class="num">${x.pre ? `<span class="pre">${x.pre}</span>` : ''}${x.num}<small>${x.unit}</small></div><div class="label">${x.label}</div></div>`).join('')}
+  ${STATS.map((x) => `<div class="cell"><div class="num">${x.pre ? `<span class="pre">${x.pre}</span>` : ''}${x.num}<small>${x.unit}</small></div><div class="label">${phrase(x.label)}</div>${x.note ? `<div class="note">${x.note}</div>` : ''}</div>`).join('')}
   </div></body></html>`;
 }
 
 async function render(page, html, out) {
   await page.setContent(html, { waitUntil: 'load' });
-  await page.evaluate(() => document.fonts.ready);
+  await fontsReady(page);
   const el = await page.$('#c');
   await el.screenshot({ path: out, omitBackground: true });
   console.log('wrote', path.relative(ROOT, out));
@@ -142,6 +139,7 @@ async function render(page, html, out) {
   fs.mkdirSync(path.join(outDir, 'cards'), { recursive: true });
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 960, height: 400 }, deviceScaleFactor: 2 });
+  await serveFonts(page, FONT_DIR);
   for (const [name, t] of Object.entries(THEMES)) {
     for (const c of CARDS) await render(page, cardHtml(c, t), path.join(outDir, 'cards', `${c.id}-${name}.png`));
     await render(page, statsHtml(t), path.join(outDir, `stats-${name}.png`));

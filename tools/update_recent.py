@@ -11,7 +11,7 @@ import sys
 import urllib.request
 
 OWNER = "Maaa2005"
-# 載せるリポジトリ（プロフィールに出している作品だけ）
+# 載せるリポジトリ（プロフィールに出している作品だけ）。共同のリポもあるので、本人のコミットだけを読む
 REPOS = [
     "Stellise",
     "web-capability-compiler",
@@ -92,7 +92,7 @@ def main():
     items = []
     for repo in REPOS:
         try:
-            commits = fetch(f"https://api.github.com/repos/{OWNER}/{repo}/commits?per_page=50", token)
+            commits = fetch(f"https://api.github.com/repos/{OWNER}/{repo}/commits?author={OWNER}&per_page=50", token)
         except Exception as e:  # 1つ失敗しても他は載せる
             print(f"skip {repo}: {e}", file=sys.stderr)
             continue

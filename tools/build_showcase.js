@@ -5,6 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const { fontCss: readFontCss, serveFonts, fontsReady, phrase, PHRASE_CSS } = require('./render');
 
 const FONT_DIR = path.resolve(process.argv[2] || process.env.FONT_DIR || 'fonts');
 const BUILD = path.resolve(process.argv[3] || path.join(__dirname, '.build'));
@@ -15,10 +16,7 @@ const b64 = (p) => fs.readFileSync(p).toString('base64');
 const shot = (name) => `data:image/jpeg;base64,${b64(path.join(SHOTS, `${name}.jpg`))}`;
 const icon = (name) => `data:image/png;base64,${b64(path.join(ICONS, `${name}.png`))}`;
 
-function fontCss() {
-  return fs.readdirSync(FONT_DIR).filter((f) => f.endsWith('.css'))
-    .map((f) => fs.readFileSync(path.join(FONT_DIR, f), 'utf8')).join('\n');
-}
+const fontCss = () => readFontCss(FONT_DIR);
 
 const THEMES = {
   dark: { fg: '#E6EDF3', body: '#D0D7DE', sub: '#8B949E', border: '#30363D', tagBg: '#ffffff0f', tagBorder: '#ffffff1f', iconBorder: '#ffffff1a', glow: '55' },
@@ -54,7 +52,7 @@ const SHOWCASE = [
 const BASE = (t) => `* { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: transparent; }
   body { font-family: 'Inter', 'Noto Sans JP', sans-serif; color: ${t.fg}; -webkit-font-smoothing: antialiased; }
-  .desc, .meta { word-break: auto-phrase; text-wrap: pretty; }`;
+  .desc, .meta { ${PHRASE_CSS} }`;
 
 const PHONE_CSS = `.phone { width: 150px; height: 326px; border-radius: 27px; padding: 5px; flex: none;
            background: linear-gradient(160deg, #3a3a48, #101016 40%, #1c1c26);
@@ -72,8 +70,8 @@ function stripHtml(s, theme) {
     <div class="glow"></div>
     <div class="text">
       <div class="top"><img class="icon" src="${icon(s.icon)}"><div><h1>${s.title}</h1><div class="status"><span class="dot"></span>${s.status}</div></div></div>
-      <p class="desc">${s.desc}</p>
-      <p class="meta">${s.meta}</p>
+      <p class="desc">${phrase(s.desc)}</p>
+      <p class="meta">${phrase(s.meta)}</p>
       <div class="tags">${s.tags.map((x) => `<span class="tag">${x}</span>`).join('')}</div>
     </div>
   </div>`, `
@@ -96,7 +94,7 @@ function stripHtml(s, theme) {
 
 async function shotEl(p, html, out) {
   await p.setContent(html, { waitUntil: 'load' });
-  await p.evaluate(() => document.fonts.ready);
+  await fontsReady(p);
   await (await p.$('#c')).screenshot({ path: out, omitBackground: true });
   console.log('wrote', out);
 }
@@ -105,6 +103,7 @@ async function shotEl(p, html, out) {
   fs.mkdirSync(path.join(BUILD, 'phones'), { recursive: true });
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1000, height: 600 }, deviceScaleFactor: 2 });
+  await serveFonts(p, FONT_DIR);
   const names = fs.readdirSync(SHOTS).filter((f) => f.endsWith('.jpg')).map((f) => f.replace(/\.jpg$/, ''));
   for (const n of names) await shotEl(p, phoneHtml(n), path.join(BUILD, 'phones', `${n}.png`));
   for (const s of SHOWCASE) {

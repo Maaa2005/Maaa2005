@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const { fontCss, serveFonts, fontsReady } = require('./render');
 
 const FONT_DIR = path.resolve(process.argv[2] || 'fonts');
 const OUT = path.resolve(process.argv[3] || path.join(__dirname, '..', 'assets'));
@@ -47,7 +48,7 @@ function chip(name, key, t) {
 }
 
 function html(t) {
-  const css = fs.readdirSync(FONT_DIR).filter((f) => f.endsWith('.css') && !f.startsWith('noto')).map((f) => fs.readFileSync(path.join(FONT_DIR, f), 'utf8')).join('\n');
+  const css = fontCss(FONT_DIR, (f) => !f.startsWith('noto'));
   return `<!doctype html><html><head><meta charset="utf-8"><style>${css}
   * { box-sizing: border-box; margin: 0; padding: 0; } html, body { background: transparent; }
   body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
@@ -67,9 +68,10 @@ function html(t) {
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 940, height: 600 }, deviceScaleFactor: 2 });
+  await serveFonts(p, FONT_DIR);
   for (const [name, t] of Object.entries(THEMES)) {
     await p.setContent(html(t), { waitUntil: 'load' });
-    await p.evaluate(() => document.fonts.ready);
+    await fontsReady(p);
     const out = path.join(OUT, `stack-${name}.png`);
     await (await p.$('#c')).screenshot({ path: out, omitBackground: true });
     console.log('wrote', out);
