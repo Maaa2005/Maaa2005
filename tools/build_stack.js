@@ -55,7 +55,7 @@ function html(t) {
   .box { width: 880px; background: ${t.bg}; border: 1px solid ${t.border}; border-radius: 16px; padding: 6px 22px; }
   .row { display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 14px 0; align-items: start; }
   .row + .row { border-top: 1px solid ${t.divider}; }
-  .lab { font: 500 12px/30px 'JetBrains Mono', monospace; color: ${t.label}; letter-spacing: .5px; }
+  .lab { font: 600 12px/30px 'Inter', sans-serif; color: ${t.label}; letter-spacing: .2px; }
   .chips { display: flex; flex-wrap: wrap; gap: 7px; }
   .chip { display: inline-flex; align-items: center; gap: 7px; height: 30px; padding: 0 11px; border-radius: 9px;
           background: ${t.chip}; border: 1px solid ${t.chipBorder}; font: 500 13px 'Inter'; color: ${t.fg}; }

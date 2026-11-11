@@ -88,7 +88,7 @@ function stripHtml(s, theme) {
   .desc { margin-top: 18px; font: 500 14.5px/1.7 'Inter', 'Noto Sans JP'; color: ${t.body}; }
   .meta { margin-top: 8px; font: 400 12px/1.5 'Inter', 'Noto Sans JP'; color: ${t.sub}; }
   .tags { margin-top: auto; display: flex; gap: 6px; }
-  .tag { font: 400 11px 'JetBrains Mono'; color: ${t.body}; background: ${t.tagBg}; border: 1px solid ${t.tagBorder}; border-radius: 999px; padding: 3px 10px; }
+  .tag { font: 500 11px 'Inter'; color: ${t.body}; background: ${t.tagBg}; border: 1px solid ${t.tagBorder}; border-radius: 999px; padding: 3px 10px; }
   `);
 }
 

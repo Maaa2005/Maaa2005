@@ -1,4 +1,4 @@
-// OSSのカード（assets/cards/*-<明暗>.png）と数字の帯（assets/stats-<明暗>.png）を作る。
+// OSSのカード（assets/cards/*-<明暗>.png）を作る。
 // HTML を Chromium で描いて 2 倍の解像度で保存する。使い方は tools/README.md。
 const fs = require('fs');
 const path = require('path');
@@ -99,7 +99,7 @@ function cardHtml(c, t) {
   .desc { margin-top: 14px; font: 500 13.5px/1.65 'Inter', 'Noto Sans JP'; color: ${t.body}; letter-spacing: .1px; }
   .meta { margin-top: 6px; font: 400 11.5px/1.5 'Inter', 'Noto Sans JP'; color: ${t.sub}; }
   .tags { margin-top: auto; display: flex; gap: 6px; }
-  .tag { font: 400 11px 'JetBrains Mono'; color: ${t.body}; background: ${t.tagBg}; border: 1px solid ${t.tagBorder}; border-radius: 999px; padding: 3px 10px; }
+  .tag { font: 500 11px 'Inter'; color: ${t.body}; background: ${t.tagBg}; border: 1px solid ${t.tagBorder}; border-radius: 999px; padding: 3px 10px; }
   </style></head><body><div class="card" id="c">
     <div class="top">${iconHtml(c.icon)}<div><h1>${c.title}</h1><div class="status"><span class="dot"></span>${st.text}</div></div></div>
     <div class="desc">${phrase(c.desc)}</div>
@@ -108,23 +108,6 @@ function cardHtml(c, t) {
   </div></body></html>`;
 }
 
-function statsHtml(t) {
-  const grad = t === THEMES.dark ? 'linear-gradient(180deg, #FFFFFF, #C9C1FF)' : 'linear-gradient(180deg, #2A2547, #6D5BD0)';
-  return `<!doctype html><html lang="ja"><head><meta charset="utf-8"><style>${fontCss()}${BASE(t)}
-  .strip { width: 880px; height: 112px; background: radial-gradient(circle at 50% -40%, #8B7CF6${t.glow}, transparent 60%), ${t.bg}; border: 1px solid ${t.border}; border-radius: 16px;
-           display: grid; grid-template-columns: repeat(${STATS.length}, 1fr); position: relative; overflow: hidden; }
-  .strip::after { content: ''; position: absolute; inset: 0 0 auto 0; height: 1.5px; background: linear-gradient(90deg, transparent, #8B7CF6${t.line}, transparent); }
-  .cell { display: flex; flex-direction: column; justify-content: center; padding: 0 26px; }
-  .cell + .cell { border-left: 1px solid ${t.divider}; }
-  .num { font: 400 46px/1 'Instrument Serif', serif; letter-spacing: -.5px; background: ${grad}; -webkit-background-clip: text; color: transparent; padding-right: 2px; }
-  .num small, .num .pre { font: 500 14px 'Inter', 'Noto Sans JP'; letter-spacing: 0; color: ${t.body}; -webkit-text-fill-color: ${t.body}; }
-  .num small { margin-left: 3px; } .num .pre { margin-right: 3px; }
-  .label { margin-top: 8px; font: 400 12px 'Inter', 'Noto Sans JP'; color: ${t.sub}; }
-  .note { margin-top: 2px; font: 400 10px 'Inter', 'Noto Sans JP'; color: ${t.sub}; opacity: .8; }
-  </style></head><body><div class="strip" id="c">
-  ${STATS.map((x) => `<div class="cell"><div class="num">${x.pre ? `<span class="pre">${x.pre}</span>` : ''}${x.num}<small>${x.unit}</small></div><div class="label">${phrase(x.label)}</div>${x.note ? `<div class="note">${x.note}</div>` : ''}</div>`).join('')}
-  </div></body></html>`;
-}
 
 async function render(page, html, out) {
   await page.setContent(html, { waitUntil: 'load' });
@@ -142,7 +125,6 @@ async function render(page, html, out) {
   await serveFonts(page, FONT_DIR);
   for (const [name, t] of Object.entries(THEMES)) {
     for (const c of CARDS) await render(page, cardHtml(c, t), path.join(outDir, 'cards', `${c.id}-${name}.png`));
-    await render(page, statsHtml(t), path.join(outDir, `stats-${name}.png`));
   }
   await browser.close();
 })();
