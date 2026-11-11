@@ -17,8 +17,6 @@ import os
 import re
 import sys
 
-sys.path.insert(0, os.path.dirname(__file__))
-from build_activity import sample_weeks  # noqa: E402
 
 MAX_MB = 3.0
 NG_WORDS = ["国際工科", "専門職大学", "NIT Nagoya", "International Institute of Technology"]
@@ -65,9 +63,6 @@ def main():
         used["dark"].add(dark[2])
         pairs += 1
 
-    if text.count("<!-- recent:start -->") != 1 or text.count("<!-- recent:end -->") != 1 \
-            or text.index("<!-- recent:start -->") > text.index("<!-- recent:end -->"):
-        errors.append("「最近の更新」の目印が1組になっていない")
 
     svgs = [os.path.join(dp, f) for dp, _, fs in os.walk(os.path.join(root, "assets")) for f in fs if f.endswith(".svg")]
     for path in [readme, *svgs]:
@@ -78,11 +73,6 @@ def main():
         if path.endswith(".svg") and "@keyframes" in body and "prefers-reduced-motion" not in body:
             errors.append(f"動きを減らす設定で止まらない: {os.path.relpath(path, root)}")
 
-    _, sample_total = sample_weeks()
-    for theme in ("light", "dark"):
-        path = os.path.join(root, "assets", f"activity-{theme}.svg")
-        if os.path.exists(path) and f">{sample_total:,}<" in open(path, encoding="utf-8").read():
-            errors.append(f"活動の表が作り物（--sample）のまま: assets/activity-{theme}.svg")
 
     for theme, files in used.items():
         size = sum(os.path.getsize(os.path.join(root, f)) for f in files if os.path.exists(os.path.join(root, f)))

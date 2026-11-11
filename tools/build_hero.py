@@ -107,9 +107,9 @@ def main():
     jp700 = "noto-sans-jp-*-700-normal.woff2"
     jp500 = "noto-sans-jp-*-500-normal.woff2"
     jp400 = "noto-sans-jp-*-400-normal.woff2"
-    mono = "jetbrains-mono-latin-500-normal.woff2"
+    mono = "inter-latin-500-normal.woff2"
     texts = (
-        text_path("MASASHI NAKAMURA  /  CLASS OF 2028", mono, 12.5, 52, 118, tracking=1.6)[0],
+        text_path("MASASHI NAKAMURA  /  CLASS OF 2028", mono, 12.5, 52, 118, tracking=1.2)[0],
         text_path("中村 奨志", jp700, 64, 48, 196, tracking=2)[0],
         text_path("AIを、日常に", jp500, 25, 52, 252, tracking=0.6)[0],
         text_path("自然に溶け込ませる。", jp500, 25, 52, 290, tracking=0.6)[0],

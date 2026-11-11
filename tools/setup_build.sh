@@ -8,11 +8,11 @@ mkdir -p "$DIR"
 cd "$DIR"
 [ -f package.json ] || echo '{"name":"profile-build","private":true}' > package.json
 npm install --no-audit --no-fund --silent playwright@1.49.1 budoux@0.6.4 simple-icons@13.21.0 \
-  @fontsource/noto-sans-jp@5.3.1 @fontsource/inter@5.3.0 @fontsource/jetbrains-mono@5.3.0 @fontsource/instrument-serif@5.3.0
+  @fontsource/noto-sans-jp@5.3.1 @fontsource/inter@5.3.0
 npx playwright install chromium
 mkdir -p fonts
 cp node_modules/@fontsource/*/files/*.woff2 fonts/
-for d in noto-sans-jp:noto-jp inter:inter jetbrains-mono:mono instrument-serif:serif; do
+for d in noto-sans-jp:noto-jp inter:inter; do
   src=${d%%:*}
   name=${d##*:}
   for c in node_modules/@fontsource/"$src"/[0-9]*.css; do
