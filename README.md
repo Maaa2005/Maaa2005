@@ -47,10 +47,10 @@
 <a href="assets/activity-light.svg#gh-light-mode-only"><img alt="GitHub の活動（この1年、日ごと）。毎朝自動で描き直しています。" src="assets/activity-light.svg" width="100%"></a><a href="assets/activity-dark.svg#gh-dark-mode-only"><img alt="GitHub の活動（この1年、日ごと）。毎朝自動で描き直しています。" src="assets/activity-dark.svg" width="100%"></a>
 
 <!-- recent:start -->
+- <samp>11/11</samp>　**[Stellise](https://github.com/Maaa2005/Stellise)** — chore: stop tracking Xcode user state and .DS_Store files
+- <samp>11/11</samp>　**[web-capability-compiler](https://github.com/Maaa2005/web-capability-compiler)** — 実行時の MCP サーバーで robots.txt を確認し、同じサイトへの間隔を空ける
 - <samp>11/07</samp>　**[aun-protocol](https://github.com/Maaa2005/aun-protocol)** — Run a second implementation in Node against the vectors in …
 - <samp>11/04</samp>　**[KASANE](https://github.com/Maaa2005/KASANE)** — fix: mask connection-string passwords and JWTs, and quiet n…
-- <samp>11/04</samp>　**[web-capability-compiler](https://github.com/Maaa2005/web-capability-compiler)** — fix(compiler): result list must beat the next list by 1.25x
-- <samp>11/02</samp>　**[local-rag-agent](https://github.com/Maaa2005/local-rag-agent)** — chore(backend): PyJWT と python-multipart を既知の穴が塞がった版へ上げる (#…
 <!-- recent:end -->
 
 <sub>活動の表と最近の更新は、毎朝 GitHub Actions で自動で書き換えています。</sub>
